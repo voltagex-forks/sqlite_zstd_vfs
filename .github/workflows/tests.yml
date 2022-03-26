@@ -28,6 +28,8 @@ jobs:
         curl --version
         which curl
         otool -L $(which curl)
+        # smoke test
+        samtools view -O BAM -@ 4 -o chr21:20000000-25000000.bam https://s3.amazonaws.com/1000genomes/1000G_2504_high_coverage/data/ERR3239334/NA12878.final.cram chr21:20000000-25000000
     - name: build
       run: |
         CXXFLAGS="-I$(brew --prefix)/include -I$(brew --prefix)/opt/sqlite/include" \
