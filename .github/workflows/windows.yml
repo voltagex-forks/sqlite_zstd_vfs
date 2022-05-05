@@ -4,8 +4,6 @@ jobs:
   build:
     runs-on: windows-latest 
     steps:
-      - uses: actions/cache@v3
-
       # Install latest CMake.
       - uses: lukka/get-cmake@latest
       # Or pin to a specific CMake version:
