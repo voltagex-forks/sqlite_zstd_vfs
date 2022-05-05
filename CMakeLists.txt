@@ -1,3 +1,4 @@
+cmake_minimum_required(VERSION 3.23)
 include(FetchContent)
 
 #.\vcpkg.exe install sqlitecpp[sqlite]:x64-windows zstd:x64-windows sqlite3:x64-windows
