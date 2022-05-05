@@ -7,7 +7,15 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
 
+      - name: Cache multiple paths
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/vcpkg
+          key: ${{ hashFiles('vcpkg.json') }}
+      
       - name: install vcpkg
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           git clone --depth=1 https://github.com/Microsoft/vcpkg.git
           .\vcpkg\bootstrap-vcpkg.bat
@@ -21,20 +29,15 @@ jobs:
           cmake --build build --config Release
           Compress-Archive -CompressionLevel Optimal -Path .\build\x64 -DestinationPath build.zip
 
-      - name: Create Release
-        uses: aaiezza/create-release@master
-        id: create_release
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
         with:
-          release_branch: feature/windows-hacks-1
-          tag: ${{ env.GITHUB_RUN_ID }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          type: 'zip'
+          filename: 'release.zip'
+          path: 'build\x64'
 
       - name: Upload Release
-        uses: actions/upload-release-asset@v1.0.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ncipollo/release-action@v1
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build.zip
-          asset_name: build.zip
+          artifacts: "release.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}
