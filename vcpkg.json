@@ -1,0 +1,13 @@
+{
+    "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
+    "name": "sqlite-zstd-vfs",
+    "version": "0.0.1",
+    "dependencies": [
+      "sqlitecpp",
+      {
+        "name": "sqlitecpp",
+        "features": ["sqlite"]
+      },
+      "zstd", "sqlite3"
+    ]
+  }
