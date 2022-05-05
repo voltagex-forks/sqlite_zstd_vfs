@@ -13,3 +13,21 @@
         run: |
           cmake . -DCMAKE_TOOLCHAIN_FILE="vcpkg\scripts\buildsystems\vcpkg.cmake" -B build
           cmake --build build
+
+      - name: Create Release
+        uses: aaiezza/create-release@master
+        id: create_release
+        with:
+          release_branch: feature/windows-hacks-1
+          tag: ${{ env.GITHUB_RUN_ID }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Jar
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: build/
+          asset_name: vfs.zip
