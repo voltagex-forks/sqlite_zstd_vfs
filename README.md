@@ -1,3 +1,7 @@
+# NOTE: This is a modified version of https://github.com/mlin/sqlite_zstd_vfs to build on Windows
+
+
+
 # sqlite_zstd_vfs
 
 This [SQLite VFS extension](https://www.sqlite.org/vfs.html) provides streaming storage compression with [Zstandard](https://facebook.github.io/zstd/), compressing [pages of the main database file](https://www.sqlite.org/fileformat.html) as they're written out, and later decompressing them as they're read in. It runs page de/compression on background threads and occasionally generates [dictionaries](https://github.com/facebook/zstd#the-case-for-small-data-compression) to improve subsequent compression.
