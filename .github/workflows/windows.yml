@@ -29,6 +29,11 @@ jobs:
           cmake --build build --config Release
           Compress-Archive -CompressionLevel Optimal -Path .\build\x64 -DestinationPath build.zip
 
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
@@ -41,3 +46,4 @@ jobs:
         with:
           artifacts: "release.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.tag_version.outputs.new_tag }}
