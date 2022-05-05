@@ -91,12 +91,15 @@ endif()
 
 #.\vcpkg.exe install sqlitecpp[sqlite]:x64-windows zstd:x64-windows sqlite3:x64-windows
 #cmake -DVCPKG_TARGET_TRIPLET=x64-windows -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake -B build
-if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-    message( FATAL_ERROR "On Windows, please install vcpkg and set CMAKE_TOOLCHAIN_FILE as per https://github.com/microsoft/vcpkg/blob/master/docs/users/integration.md#cmake-integration" )
-endif()
 
-if(NOT DEFINED VCPKG_TARGET_TRIPLET)
-    message( FATAL_ERROR "On Windows, when using vcpkg, set -DVCPKG_TARGET_TRIPLET=x86-windows or -DVCPKG_TARGET_TRIPLET=x64-windows" )
+if(NOT DEFINED ENV{GITHUB_ACTIONS})
+    if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+        message( FATAL_ERROR "On Windows, please install vcpkg and set CMAKE_TOOLCHAIN_FILE as per https://github.com/microsoft/vcpkg/blob/master/docs/users/integration.md#cmake-integration" )
+    endif()
+
+    if(NOT DEFINED VCPKG_TARGET_TRIPLET)
+        message( FATAL_ERROR "On Windows, when using vcpkg, set -DVCPKG_TARGET_TRIPLET=x86-windows or -DVCPKG_TARGET_TRIPLET=x64-windows" )
+    endif()
 endif()
 
 project(sqlite_nested_vfs VERSION 1.0
