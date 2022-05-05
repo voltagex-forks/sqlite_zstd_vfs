@@ -37,7 +37,7 @@ jobs:
           # the directory where vcpkg.json has been located. Default is false,
           # It is highly suggested to let `run-cmake` to run vcpkg (i.e. `false`)
           # (i.e. let CMake run `vcpkg install`) using the vcpkg.cmake toolchain.
-          # runVcpkgInstall: true
+          runVcpkgInstall: true
 
       - name: Run CMake consuming CMakePreset.json and vcpkg.json by mean of vcpkg.
         uses: lukka/run-cmake@v10
