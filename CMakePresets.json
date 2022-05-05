@@ -8,7 +8,7 @@
     "configurePresets": [
         {
             "name": "default",
-            "generator": "Visual Studio"
+            "generator": "Visual Studio 17 2022"
         }
     ]
 }

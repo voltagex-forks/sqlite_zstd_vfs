@@ -6,9 +6,6 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: Where are we?
-        shell: pwsh
-        run: gci; pwd
 
       # Install latest CMake.
       - uses: lukka/get-cmake@latest
