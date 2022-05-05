@@ -18,7 +18,8 @@ jobs:
       - name: Get dependencies, configure and build
         run: |
           cmake . -DCMAKE_TOOLCHAIN_FILE="vcpkg\scripts\buildsystems\vcpkg.cmake" -B build
-          cmake --build build
+          cmake --build build --config Release
+          Compress-Archive -CompressionLevel Optimal Compress-Archive -Path .\build\x64 -DestinationPath build.zip
 
       - name: Create Release
         uses: aaiezza/create-release@master
@@ -29,11 +30,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload Jar
+      - name: Upload Release
         uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/
-          asset_name: vfs.zip
+          asset_path: build.zip
+          asset_name: build.zip
