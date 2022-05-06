@@ -42,7 +42,7 @@ jobs:
         with:
           type: 'zip'
           filename: 'release.zip'
-          path: 'build\x64'
+          path: 'build'
 
       - name: Upload Release
         uses: ncipollo/release-action@v1
