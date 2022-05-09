@@ -14,7 +14,7 @@ jobs:
         with:
           path: |
             vcpkg
-          key: ${{ hashFiles('vcpkg.json') }}
+          key: ${{ hashFiles('.github/workflows/windows.yml') }}
       
       - name: install vcpkg
         if: steps.cache.outputs.cache-hit != 'true'
