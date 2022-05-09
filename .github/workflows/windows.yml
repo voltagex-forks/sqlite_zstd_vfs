@@ -27,7 +27,7 @@ jobs:
 
       - name: Get dependencies, configure and build
         run: |
-          cmake . -DCMAKE_TOOLCHAIN_FILE="vcpkg\scripts\buildsystems\vcpkg.cmake" -B build
+          cmake . -DCMAKE_TOOLCHAIN_FILE="vcpkg\scripts\buildsystems\vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=x64-windows-static-md -DBUILD_SHARED_LIBS=0 -B build
           cmake --build build --config Release
           Compress-Archive -CompressionLevel Optimal -Path .\build\x64 -DestinationPath build.zip
 
